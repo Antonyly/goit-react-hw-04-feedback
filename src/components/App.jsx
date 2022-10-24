@@ -1,58 +1,60 @@
-import React, { Component } from 'react';
+import { useState} from 'react';
 import FeedBackOptions from './FeedBack/FeedBackOptions';
 import Section from './Section/Section'
 import Statistic from './Statistics/Statistic';
 import Nostat from './Notify/Notify';
 
-export class App extends Component {
-  state = {
-    Good: 0,
-    Neutral: 0,
-    Bad: 0
-  }
+export const App = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-  onLeaveFeedback = (e) => {
-    const count = e.target.name;
-    this.setState(prevState => ({
-      [count]: prevState[count] + 1
-    }))
+    const onLeaveFeedback = (e) => {
+      const count = e.target.name;
+      if (count === 'good') {
+        return setGood(p => p + 1);
+      };
+
+      if (count === 'neutral') {
+        return setNeutral(p => p + 1);
+      };
+
+      if (count === 'bad') {
+        return setBad(p => p + 1);
+      };
   };
-  totalCount = () => {
-    const { Good, Neutral, Bad } = this.state;
-    return Good + Neutral + Bad;
+  const totalCount = () => {
+    // const { Good, Neutral, Bad } = this.state;
+    return good + neutral + bad;
   };
-  positivePercent = () => {
-    const { Good, Bad, Neutral } = this.state
+  const positivePercent = () => {
+    // const { Good, Bad, Neutral } = this.state
     let positivePercent = 0
-    const finalPositivePercentage = Math.floor((Good / (Bad + Neutral + Good)) * 100)
+    const finalPositivePercentage = Math.floor((good / (bad + neutral + good)) * 100)
     if (finalPositivePercentage > 0) {
       positivePercent = finalPositivePercentage
     }
     return positivePercent;
   };
-
-  render() {
-    const { Good, Neutral, Bad } = this.state;
-    const totalFinds = this.totalCount();
-    const positivePercent = this.positivePercent();
     
     return (
 			<>
         <Section title="Please leave feedback">
-          <FeedBackOptions options={Object.keys(this.state)} onLeaveFeedback={this.onLeaveFeedback} />
-          {totalFinds === 0 ? (
+          <FeedBackOptions options={Object.keys({good, neutral, bad})} onLeaveFeedback={onLeaveFeedback} />
+          { totalCount() === 0 ? (
             <Nostat text="No feedback"/>
           ) : <Statistic
             text="Statistics"
-            Good={Good}
-            Neutral={Neutral}
-            Bad={Bad}
-            total={totalFinds}
-            positivePercent={positivePercent}
+            Good={good}
+            Neutral={neutral}
+            Bad={bad}
+            total={totalCount()}
+            positivePercent={positivePercent()}
           />
           }
           </Section>
 			</>
 		);
-  }
+  // }
+
 }
