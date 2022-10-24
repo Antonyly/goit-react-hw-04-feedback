@@ -1,0 +1,15 @@
+.section{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    height: 400px;
+    background-color: rgb(132, 132, 132);
+    border-radius: 40px;
+    color: rgb(255, 255, 255, 0.7);
+    top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}

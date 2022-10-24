@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.feedback_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 5px 20px;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 250ms linear,
+    color 250ms linear 100ms;
+}
+.feedback_btn:hover,
+.feedback_btn:focus{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(250, 250, 250, 1);
+}
+.feedback_btn:not(:last-child){
+    margin-right: 20px;
+}
